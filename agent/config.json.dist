@@ -1,3 +1,4 @@
 {
-  "connect": "http://localhost:2901/"
+  "connect": "http://localhost:2901/",
+  "plugins": []
 }
