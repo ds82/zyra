@@ -1,4 +1,3 @@
 {
-  "server": "localhost",
-  "port": 2901
+  "connect": "http://localhost:2901/"
 }
