@@ -12,7 +12,7 @@ io.on('connect', function( socket ){
 });
 
 io.on( 'data', function( data ) {
-  console.log( 'received', data );
+  console.log( 'received, global', data );
 });
 
 server.listen( cfg.port, function() {

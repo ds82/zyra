@@ -1,4 +1,6 @@
 {
   "connect": "http://localhost:2901/",
-  "plugins": []
+  "plugins": [
+    ["./plugins/zyra-agent-os/index", { "interval": 1000 }]
+  ]
 }
