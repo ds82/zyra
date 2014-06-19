@@ -24,16 +24,38 @@ sock.on('disconnect', function() {
 });
 
 
+var db = {};
+
 cfg.plugins = cfg.plugins || [];
-cfg.plugins.forEach(function( plugin ) {
+cfg.plugins.forEach(function( item ) {
+
+  var plugin = item[0],
+      opts   = item[1];
+
+  opts.interval = opts.interval || 1000;
 
   var tmp = require( plugin );
-  if ( tmp.plugin && tmp.plugin.name && tmp.init ) {
+  if ( tmp.plugin && tmp.plugin.name && tmp.register ) {
+    db[tmp.plugin.name] = [];
+    
     plugins[tmp.plugin.name] = tmp;
-    plugins[tmp.plugin.name].init( ee );
+    
+    plugins[tmp.plugin.name].register( opts, function( data ) {
+      db[tmp.plugin.name].push( data );
+    });
+    
     console.log( 'load'.green, tmp.plugin.name );
   }
 });
+
+
+setInterval(function() {
+  console.log( 'emit data', db );
+  sock.emit( 'data', db );
+  for( var k in db ) {
+    db[k] = [];
+  }
+}, 5000 );
 
 
 console.log( 'done' );

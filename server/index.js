@@ -6,6 +6,13 @@ var ee     = require('events').EventEmitter;
 
 io.on('connect', function( socket ){
   console.log( 'client connected', socket.id );
+  socket.on( 'data', function( data ) {
+    console.log( 'received', data );
+  });
+});
+
+io.on( 'data', function( data ) {
+  console.log( 'received', data );
 });
 
 server.listen( cfg.port, function() {
