@@ -55,12 +55,15 @@ mod.register = function( opts, cb ) {
   opts.interval = opts.interval || 1000;
 
   setInterval(function() {
-    cb(usageInPercent());
+    var obj = {};
+    obj.data = usageInPercent();
+    obj.date = new Date();
+    cb( obj );
   }, opts.interval );
 };
 
 mod.plugin = {
-  name: 'zyra-agent-os'
+  name: 'core.zyra-agent-os'
 };
 
 module.exports = mod;
